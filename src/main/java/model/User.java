@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements BaseEntity{
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -49,5 +49,15 @@ public class User {
 
     public void setRole(UserRole role) {
         this.role = role;
+    }
+
+    @Override
+    public void setValue(String field, String value) {
+        switch (field){
+            case "login": setLogin(value); break;
+            case "password": setPassword(value); break;
+            case "role": setRole(UserRole.getUserRole((value.equalsIgnoreCase("User"))? 0:1)); break;
+            case "id": setId(Integer.parseInt(value)); break;
+        }
     }
 }

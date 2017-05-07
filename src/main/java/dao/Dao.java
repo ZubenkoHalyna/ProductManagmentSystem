@@ -1,5 +1,6 @@
 package dao;
 
+import model.BaseEntity;
 import model.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -27,38 +28,45 @@ public class Dao {
         System.out.println("Successfully connected to DB.\n");
     }
 
-    public Product getByID(int id) {
+    public <T extends BaseEntity> T getByID(Class<T> c, int id) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        Product p = (Product) session.load(Product.class, id);
-        p.toString();
+        T entity = (T) session.load(c, id);
+        entity.toString();
         session.getTransaction().commit();
-        return p;
+        return entity;
     }
 
-    public void delete(int id) {
+    public void delete(BaseEntity entity) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        session.delete(session.load(Product.class, id));
+        session.delete(session.load(entity.getClass(), entity.getId()));
         session.getTransaction().commit();
     }
 
-    public void update(Product product) {
+    public void update(BaseEntity entity) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        if (product.getId() == 0) {
-            session.save(product);
+        if (entity.getId() == 0) {
+            session.save(entity);
         } else {
-            session.update(product);
+            session.update(entity);
         }
         session.getTransaction().commit();
     }
 
-    public <T> List<T> getAll(Class<T> c) {
+    public <T extends BaseEntity> List<T> getAll(Class<T> c) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         List<T> list = session.createQuery("FROM "+c.getSimpleName()).list();
         session.getTransaction().commit();
         return list;
+    }
+
+    public <T extends BaseEntity> void delete(Class<T> c, int id) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.delete(session.load(c, id));
+        session.getTransaction().commit();
     }
 }

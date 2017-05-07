@@ -46,7 +46,7 @@
     </style>
 </head>
 <body>
-<a href="../index.html">Back to main menu</a>
+<a href=${IndexPageAddress}>Back to main menu</a>
 <p>
 <h2>Products:</h2>
 <p>
@@ -64,17 +64,17 @@
         <c:forEach items="${listProducts}" var="product">
             <tr>
                 <td>${product.id}</td>
-                <td><a href="/info/${product.id}"> ${product.name}</a></td>
+                <td><a href="/product/${product.id}/info"> ${product.name}</a></td>
                 <td>${product.price}</td>
                 <td>${product.producer}</td>
                 <td>${product.description}</td>
-                <td> <a href="<c:url value='/edit/${product.id}'/>">Edit</a></td>
-                <td> <a href="<c:url value='/remove/${product.id}'/>">Delete</a></td>
+                <td> <a href="<c:url value='/product/${product.id}/edit'/>">Edit</a></td>
+                <td> <a href="<c:url value='/product/${product.id}/remove'/>">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
 </c:if>
-<form action = "/edit/servlet-parameters" method = "get">
+<form action = "/product/servlet-parameters" method = "get">
     <input type = "submit" value = "Add"/>
 </form>
 </body>

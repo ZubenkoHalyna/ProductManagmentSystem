@@ -1,16 +1,11 @@
 package controllers;
 import dao.Dao;
 import model.Product;
+import model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Enumeration;
 
 @Controller
 public class ProductsController {
@@ -23,31 +18,70 @@ public class ProductsController {
     @RequestMapping("/products.html")
     public String products(Model model) {
         model.addAttribute("listProducts", (new Dao()).getAll(Product.class));
+        model.addAttribute("IndexPageAddress","../index.html");
         return "/WEB-INF/jsp/products.jsp";
     }
 
-    @RequestMapping(value = "/info/{id}")
-    public String showProduct(@PathVariable("id") long id, Model model) {
-        model.addAttribute("product", (new Dao()).getByID(((int) id)));
-        return "../WEB-INF/jsp/product.jsp";
+    @RequestMapping("/users.html")
+    public String users(Model model) {
+        model.addAttribute("listUsers", (new Dao()).getAll(User.class));
+        model.addAttribute("IndexPageAddress","../index.html");
+        return "/WEB-INF/jsp/users.jsp";
     }
 
-    @RequestMapping(value = "/edit/{id}")
+    @RequestMapping(value = "/product/{id}/info")
+    public String showProduct(@PathVariable("id") long id, Model model) {
+        model.addAttribute("product", (new Dao()).getByID(Product.class,((int) id)));
+        return "../../WEB-INF/jsp/productInfo.jsp";
+    }
+
+    @RequestMapping(value = "/user/{id}/info")
+    public String showUser(@PathVariable("id") long id, Model model) {
+        model.addAttribute("user", (new Dao()).getByID(User.class,((int) id)));
+        return "../../WEB-INF/jsp/userInfo.jsp";
+    }
+
+    @RequestMapping(value = "/product/{id}/edit")
     public String editProduct(@PathVariable("id") long id, Model model) {
-        model.addAttribute("product", (new Dao()).getByID(((int) id)));
-        return "../WEB-INF/jsp/productEdit.jsp";
+        model.addAttribute("product", (new Dao()).getByID(Product.class,((int) id)));
+        model.addAttribute("ProductsPageAddress","../../products.html");
+        return "../../WEB-INF/jsp/productEdit.jsp";
+    }
+
+    @RequestMapping(value = "/user/{id}/edit")
+    public String editUser(@PathVariable("id") long id, Model model) {
+        model.addAttribute("user", (new Dao()).getByID(User.class,((int) id)));
+        model.addAttribute("UsersPageAddress","../../users.html");
+        return "../../WEB-INF/jsp/userEdit.jsp";
     }
 
     @RequestMapping(value = "/newProduct")
     public String newProduct(Model model) {
         model.addAttribute("product", new Product());
-        return "/WEB-INF/jsp/newProduct.jsp";
+        model.addAttribute("ProductsPageAddress","../products.html");
+        return "/WEB-INF/jsp/productEdit.jsp";
     }
 
-    @RequestMapping(value = "/remove/{id}")
+    @RequestMapping(value = "/newUser")
+    public String newUser(Model model) {
+        model.addAttribute("user", new User());
+        model.addAttribute("UsersPageAddress","../users.html");
+        return "/WEB-INF/jsp/userEdit.jsp";
+    }
+
+    @RequestMapping(value = "/product/{id}/remove")
     public String removeProduct(@PathVariable("id") long id, Model model) {
-        (new Dao()).delete((int) id);
+        (new Dao()).delete(Product.class,(int) id);
         model.addAttribute("listProducts", (new Dao()).getAll(Product.class));
-        return "../WEB-INF/jsp/products.jsp";
+        model.addAttribute("IndexPageAddress","../../index.html");
+        return "../../WEB-INF/jsp/products.jsp";
+    }
+
+    @RequestMapping(value = "/user/{id}/remove")
+    public String removeUser(@PathVariable("id") long id, Model model) {
+        (new Dao()).delete(User.class,(int) id);
+        model.addAttribute("listUsers", (new Dao()).getAll(User.class));
+        model.addAttribute("IndexPageAddress","../../index.html");
+        return "../../WEB-INF/jsp/users.jsp";
     }
 }

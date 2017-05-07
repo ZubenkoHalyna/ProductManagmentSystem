@@ -18,10 +18,19 @@
 
     <servlet>
         <servlet-name>servletParameters</servlet-name>
-        <servlet-class>controllers.ServletParameters</servlet-class>
+        <servlet-class>controllers.ProductServletParameters</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>servletParameters</servlet-name>
-        <url-pattern>/edit/servlet-parameters</url-pattern>
+        <url-pattern>/product/servlet-parameters</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>userServletParameters</servlet-name>
+        <servlet-class>controllers.UserServletParameters</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>userServletParameters</servlet-name>
+        <url-pattern>/user/servlet-parameters</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -18,9 +18,9 @@ create TABLE users
   id            serial,
   login         varchar(20) NOT NULL,
   password      varchar(20) NOT NULL,
-  role          varchar(10) NOT NULL
+  role          int NOT NULL
 );
 
 insert into users(login, password, role)
-VALUES('user','user','USER'),
-  ('admin','root','ADMIN');
+VALUES('user','user',0),
+  ('admin','root',1);

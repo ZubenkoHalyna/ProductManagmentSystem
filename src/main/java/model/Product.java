@@ -13,7 +13,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Table(name = "products")
-public class Product {
+public class Product implements BaseEntity{
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -82,8 +82,9 @@ public class Product {
         this.producer = producer;
     }
 
-    public void setValue(String name, String value) {
-        switch (name){
+    @Override
+    public void setValue(String field, String value) {
+        switch (field){
             case "name": setName(value); break;
             case "price": setPrice(Integer.parseInt(value)); break;
             case "description": setDescription(value); break;

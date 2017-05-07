@@ -47,9 +47,9 @@
     </style>
 </head>
 <body>
-<a href="../products.html">Back to products</a>
+<a href=${ProductsPageAddress}>Back to products</a>
 <p>
-<form action = "servlet-parameters" method = "POST">
+<form action = "../../product/servlet-parameters" method = "POST">
     <c:if test="${!empty product}">
         <table class="tg">
             <tr>

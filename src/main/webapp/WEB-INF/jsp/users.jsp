@@ -46,9 +46,9 @@
     </style>
 </head>
 <body>
-<a href="../index.html">Back to main menu</a>
+<a href=${IndexPageAddress}>Back to main menu</a>
 <p>
-<h2>Products:</h2>
+<h2>Users:</h2>
 <p>
 <c:if test="${!empty listUsers}">
     <table class="tg">
@@ -63,17 +63,16 @@
         <c:forEach items="${listUsers}" var="user">
             <tr>
                 <td>${user.id}</td>
-                <td><a href="/info/${user.id}"> ${user.name}</a></td>
-                <td>${user.price}</td>
-                <td>${user.producer}</td>
-                <td>${user.description}</td>
-                <td> <a href="<c:url value='/edit/${user.id}'/>">Edit</a></td>
-                <td> <a href="<c:url value='/remove/${user.id}'/>">Delete</a></td>
+                <td><a href="/user/${user.id}/info"> ${user.login}</a></td>
+                <td>${user.password}</td>
+                <td>${user.role}</td>
+                <td> <a href="<c:url value='/user/${user.id}/edit'/>">Edit</a></td>
+                <td> <a href="<c:url value='/user/${user.id}/remove'/>">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
 </c:if>
-<form action = "/edit/servlet-parameters" method = "get">
+<form action = "/user/servlet-parameters" method = "get">
     <input type = "submit" value = "Add"/>
 </form>
 </body>

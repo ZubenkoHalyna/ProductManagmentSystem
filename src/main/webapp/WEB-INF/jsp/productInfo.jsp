@@ -47,36 +47,33 @@
     </style>
 </head>
 <body>
-<a href="../products.html">Back to products</a>
+<a href="../../products.html">Back to products</a>
 <p>
-<form action = "/edit/servlet-parameters" method = "POST">
-    <c:if test="${!empty product}">
-        <table class="tg">
-            <tr>
-                <td>Id:</td>
-                <td><input readonly="readonly" type = "text" name = "id" value="${product.id}"/></td>
-            </tr>
-            <tr>
-                <td>Name:</td>
-                <td><input type = "text" name = "name" value="${product.name}"/></td>
-            </tr>
-            <tr>
-                <td>Producer</td>
-                <td><input type = "text" name = "producer" value="${product.producer}"/></td>
-            </tr>
-            <tr>
-                <td>Price:</td>
-                <td><input type = "text" name = "price" value="${product.price}"/></td>
-            </tr>
-            <tr>
-                <td>Description:</td>
-                <td><input type = "text" name = "description" value="${product.description}"/></td>
-            </tr>
-            <tr>
-                <td colspan = "2"><input type = "submit" value = "Submit"/></td>
-            </tr>
-        </table>
-    </c:if>
-</form>
+
+<c:if test="${!empty product}">
+<table class="tg">
+    <tr>
+        <td>Id:</td>
+        <td>${product.id}</td>
+    </tr>
+    <tr>
+        <td>Name:</td>
+        <td>${product.name}</td>
+    </tr>
+    <tr>
+        <td>Producer</td>
+        <td>${product.producer}</td>
+    </tr>
+    <tr>
+        <td>Price:</td>
+        <td>${product.price}</td>
+    </tr>
+    <tr>
+        <td>Description:</td>
+        <td>${product.description}</td>
+    </tr>
+</table>
+</c:if>
+
 </body>
 </html>
