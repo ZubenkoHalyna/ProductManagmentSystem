@@ -7,7 +7,7 @@
     <title>${user.login} info</title>
 </head>
 <body>
-<a href="../../users.html">Back to users</a>
+<a href=${UsersPageAddress}>Back to users</a>
 <p>
 <form action = "../../user/servlet-parameters" method = "POST">
 <c:if test="${!empty user}">

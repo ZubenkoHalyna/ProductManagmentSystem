@@ -26,15 +26,17 @@ public class UserServletParameters extends ServletParameters {
     private void process(HttpServletRequest request) throws IOException {
         request.setCharacterEncoding("Utf-8");
         //TODO analysis request.getRequestURI();
-        int id = Integer.parseInt(request.getParameter("id"));
-        Dao dao = new Dao();
-        User user;
-        if (id == 0) {
-            user = new User();
-        } else {
-            user = dao.getByID(User.class, id);
-        }
+        if (request.getParameterMap().size()!=2) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            Dao dao = new Dao();
+            User user;
+            if (id == 0) {
+                user = new User();
+            } else {
+                user = dao.getByID(User.class, id);
+            }
 
-        process(request,user);
+            process(request, user);
+        }
     }
 }

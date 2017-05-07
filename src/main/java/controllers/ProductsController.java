@@ -15,6 +15,18 @@ public class ProductsController {
         return "/WEB-INF/jsp/index.jsp";
     }
 
+    @RequestMapping(value = "login.html")
+    public String login(Model model) {
+        model.addAttribute("IndexPageAddress","../index.html");
+        return "/WEB-INF/jsp/login.jsp";
+    }
+
+    @RequestMapping(value = "error.html")
+    public String error(Model model) {
+        model.addAttribute("IndexPageAddress","../index.html");
+        return "/WEB-INF/jsp/error.jsp";
+    }
+
     @RequestMapping("/products.html")
     public String products(Model model) {
         model.addAttribute("listProducts", (new Dao()).getAll(Product.class));
