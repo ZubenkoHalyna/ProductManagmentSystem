@@ -20,6 +20,10 @@
             <td>${user.login}</td>
         </tr>
         <tr>
+            <td>Photo:</td>
+            <td> <img src="../../user/${user.id}/getPhoto" height="30%" width="30%"/></td>
+        </tr>
+        <tr>
             <td>Password:</td>
             <td>${user.password}</td>
         </tr>

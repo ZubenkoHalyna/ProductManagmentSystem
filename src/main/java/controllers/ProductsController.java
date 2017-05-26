@@ -53,6 +53,12 @@ public class ProductsController {
         return "../../WEB-INF/jsp/userInfo.jsp";
     }
 
+    @RequestMapping(value = "/user/{id}/getPhoto")
+    public String getUserPhoto(@PathVariable("id") long id, Model model) {
+        model.addAttribute("id", (int) id);
+        return "../../WEB-INF/jsp/getImage.jsp?id="+id;
+    }
+
     @RequestMapping(value = "/product/{id}/edit")
     public String editProduct(@PathVariable("id") long id, Model model) {
         model.addAttribute("product", (new Dao()).getByID(Product.class,((int) id)));

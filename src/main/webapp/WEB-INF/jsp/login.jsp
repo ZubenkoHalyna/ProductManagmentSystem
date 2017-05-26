@@ -4,7 +4,7 @@
 <%@page session="false" %>
 <html>
 <head>
-    <title>${user.login} info</title>
+    <title>login</title>
 </head>
 <body>
 <a href=${IndexPageAddress}>Back to main menu</a>

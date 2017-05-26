@@ -9,7 +9,7 @@
 <body>
 <a href=${UsersPageAddress}>Back to users</a>
 <p>
-<form action = "../../user/servlet-parameters" method = "POST">
+<form action = "../../user/servlet-parameters" method = "POST" enctype="multipart/form-data">
 <c:if test="${!empty user}">
     <table class="tg">
         <tr>
@@ -31,6 +31,13 @@
                 <option value = "0">USER</option>
                 <option value = "1">ADMIN</option>
             </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Photo:</td>
+            <td>
+                    <input type="file" name="photo"  size="50"/>
+                  <!--  <input type="submit" />-->
             </td>
         </tr>
         <tr>

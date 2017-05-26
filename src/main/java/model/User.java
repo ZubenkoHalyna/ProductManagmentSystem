@@ -1,6 +1,10 @@
 package model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
+import java.io.InputStream;
+import java.sql.Blob;
 
 @Entity
 @Table(name = "users")
@@ -18,6 +22,11 @@ public class User implements BaseEntity{
 
     @Column(name ="role")
     private UserRole role;
+
+    @Lob
+    @Column(name ="photo", columnDefinition="BLOB")
+ //   @Type(type="org.hibernate.type.BinaryType")
+    private Blob photo;
 
     public int getId() {
         return id;
@@ -49,6 +58,14 @@ public class User implements BaseEntity{
 
     public void setRole(UserRole role) {
         this.role = role;
+    }
+
+    public Blob getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Blob photo) {
+        this.photo = photo;
     }
 
     @Override

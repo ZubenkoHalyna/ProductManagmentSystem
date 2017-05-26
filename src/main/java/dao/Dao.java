@@ -2,6 +2,8 @@ package dao;
 
 import model.BaseEntity;
 import model.Product;
+import model.User;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -11,6 +13,9 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.Transient;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.util.List;
 
 public class Dao {
@@ -68,5 +73,15 @@ public class Dao {
         session.beginTransaction();
         session.delete(session.load(c, id));
         session.getTransaction().commit();
+    }
+
+    public Blob createBlob(InputStream st) {
+        try {
+            Blob b = Hibernate.getLobCreator(sessionFactory.getCurrentSession()).createBlob(st, st.available());
+            return b;
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw (new RuntimeException(e));
+        }
     }
 }
